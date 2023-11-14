@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
-import validation from '../utils/validation'
-import styles from "./Form.module.css";
+import React, { useState } from "react";
+import validation from "../utils/validation";
 
-
-function Form({ login }) {
+function Form({login}) {
   const [userData, setUserData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const [errors, setErrors] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const handleChange = (event) => {
@@ -31,43 +29,74 @@ function Form({ login }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     login(userData);
-  };
+  } 
 
   return (
-    <div
-    style={{
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-    }}>
-      <form className={styles.container}>
+    <div>
+      <form>
         <label>EMAIL</label>
         <input
-          placeholder='email'
-          type='email'
+          placeholder="email"
+          type="email"
           value={userData.email}
-          name='email'
+          name="email"
           onChange={handleChange}
-          className={errors.email && styles.warning}
         />
         <p>{errors.email}</p>
 
         <label>PASSWORD</label>
         <input
-          placeholder='password'
-          type='password'
+          placeholder="password"
+          type="password"
           value={userData.password}
-          name='password'
+          name="password"
           onChange={handleChange}
         />
         <p>{errors.password}</p>
 
-        <button className={styles.boton} type='submit' onClick={handleSubmit}>
-          Submit
-        </button>
+        <button type="submit" onClick={handleSubmit}>Submit</button>
       </form>
     </div>
   );
 }
 
 export default Form;
+
+// import styles from "./Form.module.css";
+
+//   return (
+//     <div
+//     style={{
+//       display: "flex",
+//       justifyContent: "center",
+//       alignItems: "center",
+//     }}>
+//       <form className={styles.container}>
+//         <label>EMAIL</label>
+//         <input
+//           placeholder='email'
+//           type='email'
+//           value={userData.email}
+//           name='email'
+//           onChange={handleChange}
+//           className={errors.email && styles.warning}
+//         />
+//         <p>{errors.email}</p>
+
+//         <label>PASSWORD</label>
+//         <input
+//           placeholder='password'
+//           type='password'
+//           value={userData.password}
+//           name='password'
+//           onChange={handleChange}
+//         />
+//         <p>{errors.password}</p>
+
+//         <button className={styles.boton} type='submit' onClick={handleSubmit}>
+//           Submit
+//         </button>
+//       </form>
+//     </div>
+//   );
+// }

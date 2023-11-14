@@ -1,24 +1,39 @@
 import axios from "axios";
-import { useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import "./App.css";
 
 import About from "./components/About/About";
 import Cards from "./components/Cards/Cards";
 import Detail from "./components/Detail/Detail";
 import Error from "./components/Error/Error";
-// import Form from "./components/Form/Form";
+import Form from "./components/Form/Form";
 import Nav from "./components/Nav/Nav";
 
 function App() {
   // en el CP react.useState() otra forma
+  const navigate = useNavigate();
   const { pathname } = useLocation();
+  const [access, setAccess] = useState(false);
   const [characters, setCharacters] = useState([]);
   const APIKEY = "pi-natigonnet";
+  const EMAIL = "natigonnet@gmail.com";
+  const PASSWORD = "hola123";
+
+  function login(userData) {
+    if (userData.password === PASSWORD && userData.email === EMAIL) {
+      setAccess(true);
+      navigate("/home");
+    } else {
+      alert("Datos incorrectos. Intenta nuevamente.");
+    }
+  }
+
+  useEffect(() => {
+    !access && navigate("/");
+  }, [access]);
 
   const onSearch = (id) => {
-    // setCharacters([...characters, example])
-    // console.log(`Buscando personaje con ID: ${id}`);
     axios(`https://rym2.up.railway.app/api/character/${id}?key=${APIKEY}`)
       .then(({ data }) => {
         if (data.name) {
@@ -28,18 +43,22 @@ function App() {
         }
       })
       .catch((error) => console.log(error));
-    // }).catch(error => window.alert(error.message))
   };
 
   const onClose = (id) => {
     setCharacters(characters.filter((char) => char.id !== Number(id)));
   };
 
+  const logout = () => {
+    setAccess(false);
+    navigate("/");
+  };
+
   return (
     <div className="App">
-      {pathname !== "/" && <Nav onSearch={onSearch} />}
+      {pathname !== "/" && <Nav onSearch={onSearch} onLogout={logout} />}
       <Routes>
-        {/* <Route path="/" element={<Form />} /> */}
+        <Route path="/" element={<Form login={login} />} />
         <Route
           path="/home"
           element={<Cards characters={characters} onClose={onClose} />}

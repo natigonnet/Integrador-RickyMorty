@@ -5,12 +5,13 @@ import { Link } from 'react-router-dom';
 // import styles from './Nav.module.scss';
 
 
-function Nav ( {onSearch }) {
+function Nav ( {onSearch, onLogout }) {
   return (
     <div>
       <Link to='/home'><button>Home</button></Link>
       <Link to='/about'><button>About</button></Link>
       <SearchBar onSearch={onSearch} />
+      <button onClick={onLogout}>Log out</button>
     </div>
   )
 } 
