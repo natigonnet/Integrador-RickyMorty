@@ -10,6 +10,3 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById("root")
 );
-
-// ME FALTA REDUX 
-// VER STORE

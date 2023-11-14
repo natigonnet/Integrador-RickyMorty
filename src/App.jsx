@@ -7,12 +7,8 @@ import About from "./components/About/About";
 import Cards from "./components/Cards/Cards";
 import Detail from "./components/Detail/Detail";
 import Error from "./components/Error/Error";
-import Form from "./components/Form/Form";
+// import Form from "./components/Form/Form";
 import Nav from "./components/Nav/Nav";
-
-// import characters from "./data.js";
-// import Card from './components/Card.jsx'; (Eliminar la linea)
-// import SearchBar from './components/ SearchBar.jsx'; (Eliminarlo tb luego)
 
 function App() {
   // en el CP react.useState() otra forma
@@ -43,7 +39,7 @@ function App() {
     <div className="App">
       {pathname !== "/" && <Nav onSearch={onSearch} />}
       <Routes>
-        <Route path="/" element={<Form />} />
+        {/* <Route path="/" element={<Form />} /> */}
         <Route
           path="/home"
           element={<Cards characters={characters} onClose={onClose} />}
